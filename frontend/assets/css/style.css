@@ -209,9 +209,10 @@ section {
   font-size: 0.9rem;
   font-weight: 600;
   padding: 0.85em 2em;
+  min-height: 44px;
   border-radius: var(--r-pill);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: all 0.3s;
+  transition: all 0.25s ease-out;
 }
 
 .btn-secondary:hover {
@@ -267,14 +268,17 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: var(--r-md);
   padding: 1.75rem;
-  backdrop-filter: blur(6px);
-  transition: transform 0.3s, border-color 0.3s, background 0.3s;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: transform 0.25s ease-out, border-color 0.25s ease-out, background 0.25s ease-out, box-shadow 0.25s ease-out;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(253, 243, 131, 0.18);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .card--benefit {
@@ -301,13 +305,17 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--r-md);
   padding: 1.5rem;
-  transition: all 0.3s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease-out, border-color 0.25s ease-out, background 0.25s ease-out, box-shadow 0.25s ease-out;
 }
 
 .card-atividade:hover {
   background: rgba(255, 255, 255, 0.07);
   border-color: rgba(253, 243, 131, 0.18);
   transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
 }
 
 .card-atividade__header {
@@ -413,17 +421,20 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.10);
   border-radius: var(--r-sm);
   padding: 0.85em 1.1em;
+  min-height: 48px;
   color: var(--white);
-  font-size: 0.92rem;
-  transition: border-color 0.3s, background 0.3s;
+  font-family: var(--font-b);
+  font-size: 1rem;
+  transition: border-color 0.25s ease-out, background 0.25s ease-out, box-shadow 0.25s ease-out;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: rgba(253, 243, 131, 0.35);
+  border-color: rgba(253, 243, 131, 0.45);
   background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 0 3px rgba(253, 243, 131, 0.12);
 }
 
 .form-group input::placeholder {
@@ -563,11 +574,12 @@ section {
   font-size: 0.78rem;
   font-weight: 600;
   padding: 0.5em 1.25em;
+  min-height: 44px;
   border-radius: var(--r-pill);
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.10);
   color: var(--text-muted);
-  transition: all 0.3s;
+  transition: all 0.25s ease-out;
   cursor: pointer;
 }
 
@@ -587,6 +599,11 @@ section {
   margin-bottom: 2rem;
   overflow-x: auto;
   padding-bottom: 0.5rem;
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/Edge */
+}
+.day-tabs::-webkit-scrollbar {
+  display: none;                  /* Chrome/Safari */
 }
 
 .day-tab {
@@ -594,13 +611,14 @@ section {
   font-size: 0.82rem;
   font-weight: 600;
   padding: 0.65em 1.5em;
+  min-height: 44px;
   border-radius: var(--r-pill);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text-muted);
   white-space: nowrap;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.25s ease-out;
 }
 
 .day-tab:hover,
@@ -858,6 +876,50 @@ section {
 }
 
 /* ========================================
+   ACESSIBILIDADE (CRÍTICO — ui-ux-pro-max §1)
+   ======================================== */
+
+/* Focus states visíveis para teclado (2-4px ring) */
+*:focus-visible {
+  outline: 2px solid var(--gold-pale);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold-pale);
+  outline-offset: 2px;
+}
+
+/* cursor-pointer em todos os clicáveis */
+a, button, .filter-btn, .day-tab, .label,
+input[type="checkbox"], select {
+  cursor: pointer;
+}
+
+/* Skip link (acessibilidade — teclado) */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--gold-pale);
+  color: var(--dark);
+  padding: 0.5em 1.5em;
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0.5rem;
+}
+
+/* ========================================
    ANIMAÇÕES
    ======================================== */
 @keyframes pulse-cta {
@@ -893,47 +955,69 @@ section {
 .rd4 { transition-delay: 0.38s; }
 .rd5 { transition-delay: 0.48s; }
 
+/* prefers-reduced-motion (ui-ux-pro-max §7) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .btn-cta {
+    animation: none;
+  }
+}
+
 /* ========================================
-   RESPONSIVO
+   RESPONSIVO (Mobile-first — ui-ux-pro-max §5)
    ======================================== */
 
-/* ≥ 560px — Tablet */
+/* ≥ 560px — Tablet pequeno */
 @media (min-width: 560px) {
   .grid--2 { grid-template-columns: repeat(2, 1fr); }
   .grid--3 { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* ≥ 768px — Desktop start */
+/* ≥ 768px — Tablet */
 @media (min-width: 768px) {
   h1 { font-size: clamp(2.1rem, 4.5vw, 3.2rem); }
-
-  .navbar__toggle { display: none !important; }
-  .navbar__links { display: flex !important; gap: 0.75rem; }
-  .navbar__links a { font-size: 0.72rem; }
-  .navbar__logo { font-size: 0.9rem; white-space: nowrap; flex-shrink: 0; }
-  .navbar__libras { font-size: 0.6rem; padding: 0.25em 0.6em; }
 
   .hero__content {
     max-width: 620px;
   }
 }
 
-/* ≥ 960px — Navbar comfortable spacing */
-@media (min-width: 960px) {
-  .navbar__links { gap: 1.5rem; }
-  .navbar__links a { font-size: 0.85rem; }
-  .navbar__libras { font-size: 0.72rem; padding: 0.3em 0.85em; }
+/* ≥ 900px — Desktop navbar (breakpoint ajustado para caber todos os links) */
+@media (min-width: 900px) {
+  .navbar__toggle { display: none !important; }
+  .navbar__links { display: flex !important; gap: 0.85rem; }
+  .navbar__links a { font-size: 0.78rem; }
+  .navbar__logo { font-size: 0.95rem; white-space: nowrap; flex-shrink: 0; }
+  .navbar__libras { font-size: 0.62rem; padding: 0.25em 0.65em; }
 }
 
 /* ≥ 1024px — Desktop full */
 @media (min-width: 1024px) {
   .grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .navbar__links { gap: 1.5rem; }
+  .navbar__links a { font-size: 0.85rem; }
+  .navbar__logo { font-size: 1.1rem; }
+  .navbar__libras { font-size: 0.72rem; padding: 0.3em 0.85em; }
 }
 
-/* ≤ 767px — Mobile nav */
-@media (max-width: 767px) {
+/* ≤ 899px — Mobile/tablet nav (hamburger) */
+@media (max-width: 899px) {
   .navbar__toggle {
     display: flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
   }
 
   .navbar__links {
@@ -945,6 +1029,7 @@ section {
     flex-direction: column;
     background: rgba(29, 31, 28, 0.97);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 1.5rem var(--pad);
     gap: 1rem;
     border-bottom: 1px solid rgba(253, 243, 131, 0.08);
@@ -954,6 +1039,14 @@ section {
     display: flex;
   }
 
+  .navbar__links a {
+    font-size: 1rem;
+    padding: 0.5em 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
   .hero {
     min-height: auto;
     padding-top: 100px;
@@ -961,7 +1054,7 @@ section {
   }
 }
 
-/* ≤ 559px — Mobile cards */
+/* ≤ 559px — Mobile */
 @media (max-width: 559px) {
   .hero__badges {
     flex-direction: column;
@@ -979,5 +1072,24 @@ section {
 
   .participante-stats {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .card-atividade__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .day-tabs {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filters {
+    gap: 0.4rem;
+  }
+
+  .filter-btn {
+    font-size: 0.7rem;
+    padding: 0.4em 0.9em;
   }
 }
