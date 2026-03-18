@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programação — Semana de TI Inclusiva UNIP 2026</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Menu principal">
+    <div class="container">
+      <a href="../index.html" class="navbar__logo"><span>Semana de TI</span> <em>Inclusiva</em></a>
+      <button class="navbar__toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="navbar__links">
+        <a href="../index.html">Início</a>
+        <a href="programacao.html" class="active">Programação</a>
+        <a href="inscricao.html">Inscrição</a>
+        <a href="area-participante.html">Minha Área</a>
+        <a href="certificados.html">Certificados</a>
+        <a href="libras.html" class="navbar__libras">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Libras
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <section class="bg-hero" style="padding-top:100px; padding-bottom:2rem;">
+    <div class="container">
+      <div class="section-header reveal" style="margin-bottom:0;">
+        <p class="hero__eyebrow">23 a 27 de Junho · 2026</p>
+        <h1>Programação <em>Completa</em></h1>
+        <p>Explore todas as atividades organizadas por dia. Atividades com suporte em Libras estão sinalizadas.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- FILTROS -->
+  <section class="bg-dark">
+    <div class="container">
+      <!-- Filtro por tipo -->
+      <div class="filters reveal" id="filtros-tipo" role="group" aria-label="Filtrar por tipo de atividade">
+        <button class="filter-btn active" data-tipo="todos">Todos</button>
+        <button class="filter-btn" data-tipo="Palestra">Palestras</button>
+        <button class="filter-btn" data-tipo="Minicurso">Minicursos</button>
+        <button class="filter-btn" data-tipo="Workshop">Workshops</button>
+        <button class="filter-btn" data-tipo="MesaRedonda">Mesa Redonda</button>
+        <button class="filter-btn" data-tipo="Hackathon">Hackathon</button>
+        <button class="filter-btn" data-tipo="libras">🤟 Com Libras</button>
+      </div>
+
+      <!-- Tabs por dia -->
+      <div class="day-tabs reveal" id="tabs-dia" role="tablist" aria-label="Selecionar dia"></div>
+
+      <!-- Lista de atividades -->
+      <div id="lista-atividades">
+        <div class="loading">
+          <div class="spinner"></div>
+          <span>Carregando programação...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer bg-footer">
+    <div class="container">
+      <div class="footer__links">
+        <a href="../index.html">Início</a>
+        <a href="programacao.html">Programação</a>
+        <a href="inscricao.html">Inscrição</a>
+        <a href="area-participante.html">Minha Área</a>
+        <a href="certificados.html">Certificados</a>
+        <a href="libras.html">Libras</a>
+      </div>
+      <p class="footer__libras">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        Evento com suporte completo em Libras
+      </p>
+      <p class="footer__copy">&copy; 2026 Semana de TI Inclusiva UNIP — PIM V</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/utils.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

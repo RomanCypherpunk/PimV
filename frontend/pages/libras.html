@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Libras — Semana de TI Inclusiva UNIP 2026</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Menu principal">
+    <div class="container">
+      <a href="../index.html" class="navbar__logo"><span>Semana de TI</span> <em>Inclusiva</em></a>
+      <button class="navbar__toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="navbar__links">
+        <a href="../index.html">Início</a>
+        <a href="programacao.html">Programação</a>
+        <a href="inscricao.html">Inscrição</a>
+        <a href="area-participante.html">Minha Área</a>
+        <a href="certificados.html">Certificados</a>
+        <a href="libras.html" class="navbar__libras active">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Libras
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <section class="bg-hero" style="padding-top:100px; padding-bottom:2rem;">
+    <div class="container">
+      <div class="section-header reveal" style="margin-bottom:0;">
+        <p class="hero__eyebrow">Acessibilidade · Inclusão</p>
+        <h1>Glossário de <em>Libras</em></h1>
+        <p>
+          Termos técnicos de Tecnologia da Informação traduzidos para a Língua Brasileira
+          de Sinais (Libras). Consulte os sinais correspondentes e seus contextos de uso.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- INFORMAÇÕES SOBRE LIBRAS -->
+  <section class="bg-olive">
+    <div class="container">
+      <div class="grid grid--3">
+        <div class="card reveal rd1">
+          <h4 style="color:var(--gold-pale); margin-bottom:0.5rem;">O que é Libras?</h4>
+          <p class="text-muted">
+            A Língua Brasileira de Sinais é a língua natural das comunidades surdas do Brasil,
+            reconhecida oficialmente pela Lei nº 10.436/2002. É uma língua visual-gestual
+            com gramática própria.
+          </p>
+        </div>
+        <div class="card reveal rd2">
+          <h4 style="color:var(--gold-pale); margin-bottom:0.5rem;">Por que traduzir termos de TI?</h4>
+          <p class="text-muted">
+            A área de Tecnologia da Informação possui termos técnicos específicos que
+            nem sempre possuem sinais consolidados em Libras. Este glossário contribui
+            para a padronização e difusão desses termos.
+          </p>
+        </div>
+        <div class="card reveal rd3">
+          <h4 style="color:var(--gold-pale); margin-bottom:0.5rem;">Como usar este glossário?</h4>
+          <p class="text-muted">
+            Cada termo inclui a palavra em português, a descrição do sinal em Libras,
+            a categoria temática e o contexto de uso no evento. Use a busca ou filtre
+            por categoria.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- GLOSSÁRIO -->
+  <section class="bg-dark">
+    <div class="container">
+      <div class="reveal" style="margin-bottom:2rem;">
+        <h2 style="margin-bottom:1.5rem;">Termos do <em>Glossário</em></h2>
+
+        <!-- Busca -->
+        <div class="form-group" style="max-width:400px;">
+          <input type="text" id="busca-libras" placeholder="🔍 Buscar termo..." aria-label="Buscar termo no glossário">
+        </div>
+
+        <!-- Filtro por categoria -->
+        <div class="filters" id="filtros-categoria" role="group" aria-label="Filtrar por categoria">
+          <button class="filter-btn active" data-cat="todos">Todas</button>
+        </div>
+      </div>
+
+      <!-- Lista de termos -->
+      <div class="grid grid--3" id="lista-termos">
+        <div class="loading">
+          <div class="spinner"></div>
+          <span>Carregando glossário...</span>
+        </div>
+      </div>
+
+      <div id="empty-termos" class="empty-state" style="display:none;">
+        <p>Nenhum termo encontrado para esta busca.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMANDA LIBRAS -->
+  <hr class="divider--olive">
+  <section class="bg-dossier">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Demanda por <em>Intérpretes</em></h2>
+        <p>
+          Acompanhe quantos participantes solicitaram intérprete de Libras em cada atividade.
+          Isso demonstra nosso compromisso com a comunicação inclusiva.
+        </p>
+      </div>
+      <div class="grid grid--2" id="demanda-libras">
+        <div class="loading">
+          <div class="spinner"></div>
+          <span>Carregando demanda...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer bg-footer">
+    <div class="container">
+      <div class="footer__links">
+        <a href="../index.html">Início</a>
+        <a href="programacao.html">Programação</a>
+        <a href="inscricao.html">Inscrição</a>
+        <a href="area-participante.html">Minha Área</a>
+        <a href="certificados.html">Certificados</a>
+        <a href="libras.html">Libras</a>
+      </div>
+      <p class="footer__libras">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        Evento com suporte completo em Libras
+      </p>
+      <p class="footer__copy">&copy; 2026 Semana de TI Inclusiva UNIP — PIM V</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/utils.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

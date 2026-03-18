@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificados — Semana de TI Inclusiva UNIP 2026</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Menu principal">
+    <div class="container">
+      <a href="../index.html" class="navbar__logo"><span>Semana de TI</span> <em>Inclusiva</em></a>
+      <button class="navbar__toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="navbar__links">
+        <a href="../index.html">Início</a>
+        <a href="programacao.html">Programação</a>
+        <a href="inscricao.html">Inscrição</a>
+        <a href="area-participante.html">Minha Área</a>
+        <a href="certificados.html" class="active">Certificados</a>
+        <a href="libras.html" class="navbar__libras">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Libras
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <section class="bg-hero" style="padding-top:100px; padding-bottom:2rem;">
+    <div class="container">
+      <div class="section-header reveal" style="margin-bottom:0;">
+        <h1>Certificados <em>Digitais</em></h1>
+        <p>Valide seu certificado ou consulte os certificados emitidos para o seu CPF.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="bg-dark">
+    <div class="container" style="max-width:640px;">
+
+      <!-- Validar certificado -->
+      <div class="certificado-validacao reveal">
+        <h3 style="margin-bottom:1.5rem;">Validar Certificado</h3>
+        <p class="text-muted" style="margin-bottom:1rem;">
+          Insira o código de validação do certificado (formato: CERT-XXXXXXXX).
+        </p>
+        <div class="form-group">
+          <label for="codigo-validacao">Código de Validação</label>
+          <input type="text" id="codigo-validacao" placeholder="CERT-XXXXXXXX" style="text-transform:uppercase;">
+        </div>
+        <button class="btn-cta" id="btn-validar" style="width:100%;">Validar Certificado</button>
+
+        <div id="resultado-validacao"></div>
+      </div>
+
+      <hr class="divider" style="margin:3rem 0;">
+
+      <!-- Buscar certificados por CPF -->
+      <div class="reveal">
+        <h3 style="margin-bottom:1.5rem;">Meus Certificados</h3>
+        <p class="text-muted" style="margin-bottom:1rem;">
+          Consulte todos os certificados emitidos para o seu CPF.
+        </p>
+        <div class="form-group">
+          <label for="cpf-certificado">CPF</label>
+          <input type="text" id="cpf-certificado" placeholder="00000000000 (somente números)" maxlength="11">
+        </div>
+        <button class="btn-secondary" id="btn-buscar-certificados" style="width:100%;">Buscar Certificados</button>
+
+        <div id="lista-certificados" style="margin-top:1.5rem;"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer bg-footer">
+    <div class="container">
+      <div class="footer__links">
+        <a href="../index.html">Início</a>
+        <a href="programacao.html">Programação</a>
+        <a href="inscricao.html">Inscrição</a>
+        <a href="area-participante.html">Minha Área</a>
+        <a href="certificados.html">Certificados</a>
+        <a href="libras.html">Libras</a>
+      </div>
+      <p class="footer__libras">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        Evento com suporte completo em Libras
+      </p>
+      <p class="footer__copy">&copy; 2026 Semana de TI Inclusiva UNIP — PIM V</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/utils.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

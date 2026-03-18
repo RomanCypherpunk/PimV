@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Área — Semana de TI Inclusiva UNIP 2026</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Menu principal">
+    <div class="container">
+      <a href="../index.html" class="navbar__logo"><span>Semana de TI</span> <em>Inclusiva</em></a>
+      <button class="navbar__toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="navbar__links">
+        <a href="../index.html">Início</a>
+        <a href="programacao.html">Programação</a>
+        <a href="inscricao.html">Inscrição</a>
+        <a href="area-participante.html" class="active">Minha Área</a>
+        <a href="certificados.html">Certificados</a>
+        <a href="libras.html" class="navbar__libras">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Libras
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <section class="bg-hero" style="padding-top:100px; padding-bottom:2rem;">
+    <div class="container">
+      <div class="section-header reveal" style="margin-bottom:0;">
+        <h1>Minha <em>Área</em></h1>
+        <p>Acompanhe suas inscrições, notificações e envie feedback sobre as atividades.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LOGIN POR CPF -->
+  <section class="bg-dark" id="section-login">
+    <div class="container" style="max-width:480px;">
+      <div class="reveal">
+        <h3 style="margin-bottom:1rem; text-align:center;">Acesse com seu CPF</h3>
+        <div class="form-group">
+          <label for="cpf-login">CPF</label>
+          <input type="text" id="cpf-login" placeholder="00000000000 (somente números)" maxlength="11">
+        </div>
+        <button class="btn-cta" id="btn-login" style="width:100%;">Acessar Minha Área</button>
+        <div id="alert-login" class="alert" style="margin-top:1rem;" role="alert"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAINEL DO PARTICIPANTE -->
+  <section class="bg-dark" id="section-painel" style="display:none;">
+    <div class="container">
+
+      <!-- Cabeçalho -->
+      <div class="participante-header reveal">
+        <div>
+          <h2>Olá, <em id="painel-nome"></em>!</h2>
+          <p class="text-muted" id="painel-email"></p>
+        </div>
+        <button class="btn-secondary" id="btn-logout">Sair</button>
+      </div>
+
+      <!-- Estatísticas -->
+      <div class="participante-stats reveal">
+        <div class="stat-card">
+          <div class="stat-card__number" id="stat-inscricoes">0</div>
+          <div class="stat-card__label">Inscrições Ativas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number" id="stat-notificacoes">0</div>
+          <div class="stat-card__label">Notificações</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number" id="stat-concluidas">0</div>
+          <div class="stat-card__label">Concluídas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number" id="stat-certificados">0</div>
+          <div class="stat-card__label">Certificados</div>
+        </div>
+      </div>
+
+      <!-- Notificações -->
+      <div class="reveal" style="margin-bottom:3rem;">
+        <h3 style="margin-bottom:1rem;">Notificações</h3>
+        <div id="lista-notificacoes">
+          <div class="empty-state">
+            <p>Nenhuma notificação ainda.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Minhas Inscrições -->
+      <div class="reveal" style="margin-bottom:3rem;">
+        <h3 style="margin-bottom:1rem;">Minhas Inscrições</h3>
+        <div id="lista-inscricoes-painel">
+          <div class="empty-state">
+            <p>Nenhuma inscrição encontrada.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="reveal">
+        <h3 style="margin-bottom:1rem;">Enviar Feedback</h3>
+        <p class="text-muted" style="margin-bottom:1rem;">
+          Sua opinião é muito importante para melhorarmos os próximos eventos.
+        </p>
+        <div id="alert-feedback" class="alert" role="alert"></div>
+        <form id="form-feedback" novalidate>
+          <div class="form-group">
+            <label for="feedback-atividade">Atividade</label>
+            <select id="feedback-atividade" required>
+              <option value="">Selecione uma atividade...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="feedback-nota">Nota (1 a 5)</label>
+            <select id="feedback-nota" required>
+              <option value="">Selecione...</option>
+              <option value="1">1 — Ruim</option>
+              <option value="2">2 — Regular</option>
+              <option value="3">3 — Bom</option>
+              <option value="4">4 — Muito Bom</option>
+              <option value="5">5 — Excelente</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="feedback-comentario">Comentário</label>
+            <textarea id="feedback-comentario" rows="3" placeholder="O que achou da atividade?"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="feedback-sugestao">Sugestão de Melhoria</label>
+            <textarea id="feedback-sugestao" rows="2" placeholder="Alguma sugestão para o próximo evento?"></textarea>
+          </div>
+          <button type="submit" class="btn-cta" style="width:100%;">Enviar Feedback</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer bg-footer">
+    <div class="container">
+      <div class="footer__links">
+        <a href="../index.html">Início</a>
+        <a href="programacao.html">Programação</a>
+        <a href="inscricao.html">Inscrição</a>
+        <a href="area-participante.html">Minha Área</a>
+        <a href="certificados.html">Certificados</a>
+        <a href="libras.html">Libras</a>
+      </div>
+      <p class="footer__libras">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        Evento com suporte completo em Libras
+      </p>
+      <p class="footer__copy">&copy; 2026 Semana de TI Inclusiva UNIP — PIM V</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/utils.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
