@@ -2,6 +2,20 @@
    MAIN — Lógica de cada página
    ======================================== */
 
+/* ── SVG Icons (substituem emojis) ── */
+const SVG = {
+  calendar: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>',
+  clock: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>',
+  people: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>',
+  libras: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 7c0-.55-.45-1-1-1s-1 .45-1 1v4h-1V4c0-.55-.45-1-1-1s-1 .45-1 1v7h-1V3c0-.55-.45-1-1-1s-1 .45-1 1v8h-1V5c0-.55-.45-1-1-1s-1 .45-1 1v10l-2.7-2.7c-.39-.39-1.02-.39-1.41 0s-.39 1.02 0 1.41L9.53 18.36C10.46 19.29 11.73 20 13 20h3c2.76 0 5-2.24 5-5V7z"/></svg>',
+  location: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>',
+  speaker: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>',
+  check: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>',
+  checkLg: '<svg width="48" height="48" viewBox="0 0 24 24" fill="var(--olive-accent)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>',
+  errorLg: '<svg width="48" height="48" viewBox="0 0 24 24" fill="#f0a0a0"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>',
+  search: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>'
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initReveal();
@@ -23,6 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+/* ── Helper: calcular horário de término ── */
+function calcularHorarioFim(dataHora, duracaoMinutos) {
+  const d = new Date(dataHora);
+  d.setMinutes(d.getMinutes() + duracaoMinutos);
+  return d.toISOString();
+}
+
 /* ════════════════════════════════════════
    HOME (index.html)
    ════════════════════════════════════════ */
@@ -32,7 +53,6 @@ async function initHome() {
     const container = document.getElementById('atividades-destaque');
     if (!container) return;
 
-    // Mostrar as 4 primeiras atividades
     const destaque = atividades.slice(0, 4);
     container.innerHTML = destaque.map(a => cardAtividadeHTML(a)).join('');
     initReveal();
@@ -42,7 +62,7 @@ async function initHome() {
 }
 
 /* ════════════════════════════════════════
-   PROGRAMAÇÃO
+   PROGRAMACAO
    ════════════════════════════════════════ */
 let todasAtividades = [];
 let filtroTipoAtual = 'todos';
@@ -56,12 +76,12 @@ async function initProgramacao() {
     initFiltroTipo();
   } catch (err) {
     document.getElementById('lista-atividades').innerHTML =
-      '<p class="text-muted">Erro ao carregar programação.</p>';
+      '<p class="text-muted">Erro ao carregar programacao.</p>';
   }
 }
 
 function renderDayTabs() {
-  const datas = [...new Set(todasAtividades.map(a => a.data.split('T')[0]))].sort();
+  const datas = [...new Set(todasAtividades.map(a => a.dataHora.split('T')[0]))].sort();
   const container = document.getElementById('tabs-dia');
   if (!container) return;
 
@@ -104,7 +124,7 @@ function renderAtividades() {
   }
 
   if (filtroDiaAtual !== 'todos') {
-    filtradas = filtradas.filter(a => a.data.startsWith(filtroDiaAtual));
+    filtradas = filtradas.filter(a => a.dataHora.startsWith(filtroDiaAtual));
   }
 
   const container = document.getElementById('lista-atividades');
@@ -114,10 +134,11 @@ function renderAtividades() {
   }
 
   container.innerHTML = `<div class="grid grid--2">${filtradas.map(a => cardAtividadeHTML(a)).join('')}</div>`;
+  initReveal();
 }
 
 /* ════════════════════════════════════════
-   INSCRIÇÃO
+   INSCRICAO
    ════════════════════════════════════════ */
 let participanteAtual = null;
 
@@ -158,17 +179,15 @@ async function cadastrarParticipante() {
   }
 
   if (cpf.length !== 11 || !/^\d+$/.test(cpf)) {
-    mostrarAlerta('alert-inscricao', 'error', 'CPF deve conter 11 dígitos numéricos.');
+    mostrarAlerta('alert-inscricao', 'error', 'CPF deve conter 11 digitos numericos.');
     return;
   }
 
   try {
-    // Tenta buscar participante existente pelo CPF
     let participante;
     try {
       participante = await GET(`/participantes/cpf/${cpf}`);
     } catch {
-      // Não existe, cadastrar
       participante = await POST('/participantes', {
         nome, email, cpf, instituicao, telefone,
         necessitaInterpreteLibras: necessitaLibras
@@ -196,15 +215,15 @@ async function mostrarStepAtividade() {
     container.innerHTML = atividades.map(a => `
       <div class="card-atividade" style="margin-bottom:0.75rem;">
         <div class="card-atividade__header">
-          <h4 class="card-atividade__title">${a.nome}</h4>
+          <h4 class="card-atividade__title">${a.titulo}</h4>
           <span class="label label--gold">${tipoAtividadeLabel(a.tipo)}</span>
         </div>
         <p class="text-muted" style="font-size:0.85rem;">${a.descricao || ''}</p>
         <div class="card-atividade__meta">
-          <span class="card-atividade__info">📅 ${formatarData(a.data)}</span>
-          <span class="card-atividade__info">🕐 ${formatarHora(a.horarioInicio)} — ${formatarHora(a.horarioFim)}</span>
-          <span class="card-atividade__info">👥 ${a.vagasDisponiveis} vagas</span>
-          ${a.temInterpreteLibras ? '<span class="label label--libras" style="font-size:0.65rem;">🤟 Libras</span>' : ''}
+          <span class="card-atividade__info">${SVG.calendar} ${formatarData(a.dataHora)}</span>
+          <span class="card-atividade__info">${SVG.clock} ${formatarHora(a.dataHora)} — ${formatarHora(calcularHorarioFim(a.dataHora, a.duracaoMinutos))}</span>
+          <span class="card-atividade__info">${SVG.people} ${a.vagasDisponiveis} vagas</span>
+          ${a.temInterpreteLibras ? `<span class="label label--libras" style="font-size:0.65rem;">${SVG.libras} Libras</span>` : ''}
         </div>
         <button class="btn-secondary" style="margin-top:1rem; width:100%;" onclick="inscrever(${a.id})" ${a.vagasDisponiveis <= 0 ? 'disabled style="opacity:0.5;margin-top:1rem;width:100%;"' : ''}>
           ${a.vagasDisponiveis > 0 ? 'Inscrever-se nesta atividade' : 'Sem vagas'}
@@ -226,14 +245,14 @@ async function inscrever(atividadeId) {
     document.getElementById('step-atividade').style.display = 'none';
     document.getElementById('step-confirmacao').style.display = 'block';
     document.getElementById('msg-confirmacao').textContent =
-      `Inscrição #${inscricao.id} confirmada com sucesso! Status: ${statusLabel(inscricao.status)}. Confira suas notificações na Minha Área.`;
+      `Inscricao #${inscricao.id} confirmada com sucesso! Status: ${statusLabel(inscricao.status)}. Confira suas notificacoes na Minha Area.`;
   } catch (err) {
     mostrarAlerta('alert-inscricao', 'error', err.message);
   }
 }
 
 /* ════════════════════════════════════════
-   ÁREA DO PARTICIPANTE
+   AREA DO PARTICIPANTE
    ════════════════════════════════════════ */
 async function initAreaParticipante() {
   const sessao = obterSessao();
@@ -256,7 +275,7 @@ async function initAreaParticipante() {
 async function loginCPF() {
   const cpf = document.getElementById('cpf-login').value.trim();
   if (!cpf || cpf.length !== 11) {
-    mostrarAlerta('alert-login', 'error', 'Informe um CPF válido com 11 dígitos.');
+    mostrarAlerta('alert-login', 'error', 'Informe um CPF valido com 11 digitos.');
     return;
   }
   try {
@@ -264,7 +283,7 @@ async function loginCPF() {
     salvarSessao(participante);
     await carregarPainel(participante);
   } catch {
-    mostrarAlerta('alert-login', 'error', 'CPF não encontrado. Faça sua inscrição primeiro.');
+    mostrarAlerta('alert-login', 'error', 'CPF nao encontrado. Faca sua inscricao primeiro.');
   }
 }
 
@@ -275,7 +294,6 @@ async function carregarPainel(participante) {
   document.getElementById('painel-email').textContent = participante.email;
 
   try {
-    // Carregar dados em paralelo
     const [inscricoes, notifData, certificados, atividades] = await Promise.all([
       GET(`/inscricoes?cpf=${participante.cpf}`).catch(() => []),
       GET(`/notificacoes?participanteId=${participante.id}`).catch(() => []),
@@ -283,7 +301,6 @@ async function carregarPainel(participante) {
       GET('/atividades?eventoId=1').catch(() => [])
     ]);
 
-    // Stats
     const ativas = inscricoes.filter(i => i.status === 'Confirmada');
     const concluidas = inscricoes.filter(i => i.status === 'Concluida');
     const naoLidas = notifData.filter(n => !n.lida);
@@ -293,19 +310,15 @@ async function carregarPainel(participante) {
     document.getElementById('stat-concluidas').textContent = concluidas.length;
     document.getElementById('stat-certificados').textContent = certificados.length;
 
-    // Notificações
     renderNotificacoes(notifData);
-
-    // Inscrições
     renderInscricoesPainel(inscricoes, atividades);
 
-    // Preencher select de feedback com atividades das inscrições
     const selectAtiv = document.getElementById('feedback-atividade');
     selectAtiv.innerHTML = '<option value="">Selecione uma atividade...</option>';
     inscricoes.forEach(insc => {
       const ativ = atividades.find(a => a.id === insc.atividadeId);
       if (ativ) {
-        selectAtiv.innerHTML += `<option value="${ativ.id}">${ativ.nome}</option>`;
+        selectAtiv.innerHTML += `<option value="${ativ.id}">${ativ.titulo}</option>`;
       }
     });
 
@@ -318,7 +331,7 @@ async function carregarPainel(participante) {
 function renderNotificacoes(notificacoes) {
   const container = document.getElementById('lista-notificacoes');
   if (!notificacoes.length) {
-    container.innerHTML = '<div class="empty-state"><p>Nenhuma notificação.</p></div>';
+    container.innerHTML = '<div class="empty-state"><p>Nenhuma notificacao.</p></div>';
     return;
   }
 
@@ -339,7 +352,6 @@ async function marcarLida(id, btn) {
     await PATCH(`/notificacoes/${id}/lida`);
     btn.closest('.notificacao-item').classList.remove('notificacao-item--nao-lida');
     btn.remove();
-    // Atualizar contador
     const counter = document.getElementById('stat-notificacoes');
     counter.textContent = Math.max(0, parseInt(counter.textContent) - 1);
   } catch (err) {
@@ -350,33 +362,33 @@ async function marcarLida(id, btn) {
 function renderInscricoesPainel(inscricoes, atividades) {
   const container = document.getElementById('lista-inscricoes-painel');
   if (!inscricoes.length) {
-    container.innerHTML = '<div class="empty-state"><p>Nenhuma inscrição encontrada.</p></div>';
+    container.innerHTML = '<div class="empty-state"><p>Nenhuma inscricao encontrada.</p></div>';
     return;
   }
 
   container.innerHTML = inscricoes.map(insc => {
     const ativ = atividades.find(a => a.id === insc.atividadeId);
-    const nome = ativ ? ativ.nome : `Atividade #${insc.atividadeId}`;
+    const titulo = ativ ? ativ.titulo : `Atividade #${insc.atividadeId}`;
     const statusClass = insc.status === 'Confirmada' ? 'label--olive' :
                         insc.status === 'Concluida' ? 'label--gold' : 'label--light';
     return `
       <div class="card-atividade" style="margin-bottom:0.75rem;">
         <div class="card-atividade__header">
-          <h4 class="card-atividade__title">${nome}</h4>
+          <h4 class="card-atividade__title">${titulo}</h4>
           <span class="label ${statusClass}">${statusLabel(insc.status)}</span>
         </div>
         <div class="card-atividade__meta">
-          <span class="card-atividade__info">📅 Inscrito em ${formatarData(insc.dataInscricao)}</span>
-          ${insc.solicitouInterpreteLibras ? '<span class="label label--libras" style="font-size:0.65rem;">🤟 Libras</span>' : ''}
+          <span class="card-atividade__info">${SVG.calendar} Inscrito em ${formatarData(insc.dataInscricao)}</span>
+          ${insc.solicitouInterpreteLibras ? `<span class="label label--libras" style="font-size:0.65rem;">${SVG.libras} Libras</span>` : ''}
         </div>
-        ${insc.status === 'Confirmada' ? `<button class="btn-secondary" style="margin-top:0.75rem; font-size:0.8rem;" onclick="cancelarInscricao(${insc.id})">Cancelar Inscrição</button>` : ''}
+        ${insc.status === 'Confirmada' ? `<button class="btn-secondary" style="margin-top:0.75rem; font-size:0.8rem;" onclick="cancelarInscricao(${insc.id})">Cancelar Inscricao</button>` : ''}
       </div>
     `;
   }).join('');
 }
 
 async function cancelarInscricao(id) {
-  if (!confirm('Tem certeza que deseja cancelar esta inscrição?')) return;
+  if (!confirm('Tem certeza que deseja cancelar esta inscricao?')) return;
   try {
     await PATCH(`/inscricoes/${id}/cancelar`);
     const sessao = obterSessao();
@@ -409,7 +421,7 @@ async function enviarFeedback(e) {
       comentario,
       sugestao
     });
-    mostrarAlerta('alert-feedback', 'success', 'Feedback enviado com sucesso! Obrigado pela sua avaliação.');
+    mostrarAlerta('alert-feedback', 'success', 'Feedback enviado com sucesso! Obrigado pela sua avaliacao.');
     document.getElementById('form-feedback').reset();
   } catch (err) {
     mostrarAlerta('alert-feedback', 'error', err.message);
@@ -436,10 +448,10 @@ async function validarCertificado() {
     const resultado = await GET(`/certificados/validar/${codigo}`);
     container.innerHTML = `
       <div class="certificado-resultado certificado-resultado--valido">
-        <div style="font-size:2.5rem; margin-bottom:0.75rem;">✅</div>
-        <h3>Certificado Válido</h3>
+        <div style="margin-bottom:0.75rem;">${SVG.checkLg}</div>
+        <h3>Certificado Valido</h3>
         <p style="margin-top:0.75rem; color:var(--text-soft);">
-          Código: <strong>${resultado.codigoValidacao}</strong><br>
+          Codigo: <strong>${resultado.codigoValidacao}</strong><br>
           Emitido em: ${formatarData(resultado.dataEmissao)}
         </p>
       </div>
@@ -447,10 +459,10 @@ async function validarCertificado() {
   } catch {
     container.innerHTML = `
       <div class="certificado-resultado certificado-resultado--invalido">
-        <div style="font-size:2.5rem; margin-bottom:0.75rem;">❌</div>
-        <h3 style="color:#f0a0a0;">Certificado Não Encontrado</h3>
+        <div style="margin-bottom:0.75rem;">${SVG.errorLg}</div>
+        <h3 style="color:#f0a0a0;">Certificado Nao Encontrado</h3>
         <p style="margin-top:0.75rem; color:var(--text-muted);">
-          O código informado não corresponde a nenhum certificado válido.
+          O codigo informado nao corresponde a nenhum certificado valido.
         </p>
       </div>
     `;
@@ -476,7 +488,7 @@ async function buscarCertificados() {
           <span class="label label--gold">${c.codigoValidacao}</span>
         </div>
         <div class="card-atividade__meta">
-          <span class="card-atividade__info">📅 Emitido em ${formatarData(c.dataEmissao)}</span>
+          <span class="card-atividade__info">${SVG.calendar} Emitido em ${formatarData(c.dataEmissao)}</span>
         </div>
       </div>
     `).join('');
@@ -486,7 +498,7 @@ async function buscarCertificados() {
 }
 
 /* ════════════════════════════════════════
-   LIBRAS (Glossário)
+   LIBRAS (Glossario)
    ════════════════════════════════════════ */
 let todosTermos = [];
 let categoriasLibras = [];
@@ -505,7 +517,7 @@ async function initLibras() {
     initBuscaLibras();
     await carregarDemandaLibras();
   } catch (err) {
-    console.error('Erro ao carregar glossário:', err);
+    console.error('Erro ao carregar glossario:', err);
   }
 }
 
@@ -588,14 +600,13 @@ async function carregarDemandaLibras() {
       return;
     }
 
-    // Para cada atividade, buscar demanda
     const demandas = await Promise.all(
       atividadesComLibras.map(async (a) => {
         try {
           const d = await GET(`/inscricoes/demanda-libras/${a.id}`);
           return { ...a, demanda: d };
         } catch {
-          return { ...a, demanda: { totalInscritos: 0, solicitaramLibras: 0 } };
+          return { ...a, demanda: { solicitacoesLibras: 0 } };
         }
       })
     );
@@ -603,12 +614,15 @@ async function carregarDemandaLibras() {
     container.innerHTML = demandas.map(d => `
       <div class="card" style="display:flex; align-items:center; gap:1.25rem;">
         <div class="icon-box">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          ${SVG.libras}
         </div>
         <div style="flex:1;">
-          <h4>${d.nome}</h4>
+          <h4>${d.titulo}</h4>
           <p class="text-muted" style="font-size:0.82rem;">
-            ${d.demanda.solicitaramLibras || 0} de ${d.demanda.totalInscritos || 0} inscritos solicitaram intérprete
+            ${d.demanda.solicitacoesLibras || 0} participante(s) solicitaram interprete
+          </p>
+          <p class="text-muted" style="font-size:0.75rem; margin-top:0.25rem;">
+            ${SVG.speaker} ${d.palestrante} &middot; ${SVG.location} ${d.sala}
           </p>
         </div>
       </div>
@@ -625,15 +639,17 @@ function cardAtividadeHTML(a) {
   return `
     <div class="card-atividade reveal">
       <div class="card-atividade__header">
-        <h4 class="card-atividade__title">${a.nome}</h4>
+        <h4 class="card-atividade__title">${a.titulo}</h4>
         <span class="label label--gold">${tipoAtividadeLabel(a.tipo)}</span>
       </div>
       <p class="text-muted" style="font-size:0.85rem; margin-top:0.5rem;">${a.descricao || ''}</p>
       <div class="card-atividade__meta">
-        <span class="card-atividade__info">📅 ${formatarData(a.data)}</span>
-        <span class="card-atividade__info">🕐 ${formatarHora(a.horarioInicio)} — ${formatarHora(a.horarioFim)}</span>
-        <span class="card-atividade__info">👥 ${a.vagasDisponiveis} vagas</span>
-        ${a.temInterpreteLibras ? '<span class="label label--libras" style="font-size:0.65rem;">🤟 Libras</span>' : ''}
+        <span class="card-atividade__info">${SVG.calendar} ${formatarData(a.dataHora)}</span>
+        <span class="card-atividade__info">${SVG.clock} ${formatarHora(a.dataHora)} — ${formatarHora(calcularHorarioFim(a.dataHora, a.duracaoMinutos))}</span>
+        <span class="card-atividade__info">${SVG.people} ${a.vagasDisponiveis} vagas</span>
+        <span class="card-atividade__info">${SVG.speaker} ${a.palestrante}</span>
+        <span class="card-atividade__info">${SVG.location} ${a.sala}</span>
+        ${a.temInterpreteLibras ? `<span class="label label--libras" style="font-size:0.65rem;">${SVG.libras} Libras</span>` : ''}
       </div>
     </div>
   `;
