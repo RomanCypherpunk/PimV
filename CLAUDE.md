@@ -1,8 +1,8 @@
 # CLAUDE.md — Instruções do Projeto PIM V
 
 > **Atualizado em:** 2026-03-18
-> **Autor:** Enzo Xavier Santos (RA: xxxxxxxx)
-> **Curso:** Análise e Desenvolvimento de Sistemas — UNIP EaD — 5o semestre
+> **Autor:** Enzo Xavier Santos (RA: 2620639)
+> **Curso:** Análise e Desenvolvimento de Sistemas — UNIP EaD — 2o semestre
 
 ---
 
@@ -297,6 +297,8 @@ docs: adicionar documento acadêmico ABNT
 8. **Atualizar este CLAUDE.md** a cada nova movimentação significativa no projeto
 9. **Conventional Commits em português** — sem co-author, mensagens claras
 10. **Acessibilidade obrigatória** — focus states, aria-labels, contraste, reduced-motion
+11. **Commit + push automático** — após cada alteração significativa, commitar e fazer push sem perguntar
+12. **Atualizar o CLAUDE.md** junto com o commit quando houver mudança relevante no projeto
 
 ---
 
