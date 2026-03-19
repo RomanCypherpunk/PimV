@@ -67,11 +67,18 @@ var app = builder.Build();
 // Seed de dados iniciais (evento fictício, atividades, glossário Libras)
 SeedData.Inicializar(pastaData);
 
+// Arquivos estáticos (wwwroot)
+app.UseStaticFiles();
+
 // Swagger em desenvolvimento
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.DocumentTitle = "EventosAPI — Semana de TI Inclusiva UNIP 2026";
+        options.InjectStylesheet("/swagger/custom-swagger.css");
+    });
 }
 
 app.UseCors("PermitirFrontend");
