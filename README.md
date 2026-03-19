@@ -83,7 +83,7 @@ O sistema é um site completo para a **"Semana de TI Inclusiva UNIP 2026"** — 
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/PimV.git
+git clone https://github.com/RomanCypherpunk/PimV.git
 cd PimV
 ```
 
